@@ -34,49 +34,8 @@
                         <div class="shop-content">
                           <div style="" class="ais-Hits">
                             <ul class="ais-Hits-list">
-                              <li class="ais-Hits-item">
-                                <div class="">
-                                  <div class="rct-block  product-block flex-column justify-content-between overflow-hidden bg-white">
-                                    <a href="/catalogo/product/sku/982651" style="text-decoration: none; height: 100%; display: inline; background-color: white;">
-                                      <div id="982651" class="overlay-wrap overflow-hidden bg-white" style="display: flex; align-items: center; justify-content: center; max-height: 220px; width: 100%;">
-                                        <div class="text-center">
-                                          <div class="product-image-shadow"></div>
-                                          <div class="d-flex labels-container"></div>
-                                          <div class="d-flex cyber-lider-cards-container"></div>
-                                          <div id="image" class="bg-white">
-                                            <div>
-                                              <img id="lazy-img" class="img-hover-zoom img-fluid m-auto " alt="Mademsa - Refrigerador Frío Directo 212 Litros /&nbsp;Nordik 2200" src="https://images.lider.cl/wmtcl?source=url[file:/productos/982651a.jpg]&amp;scale=size[300x300]&amp;&amp;sink" style="filter: unset; min-width: 50px; max-height: 220px;">
-                                            </div>
-                                          </div>
-                                          <div></div>
-                                        </div>
-                                      </div>
-                                      <div class=" product-info">
-                                        <div class="d-flex text-left product-description  ">
-                                          <div>
-                                            <span class="" style="font-weight: bold; color: rgb(0, 0, 0);">PRODUCT_BRAND</span>
-                                            <span> PRODUCT DESCRIPTION CAN BE VERY VERY VERY LARGE AND CONTINUES WRITING</span>
-                                          </div>
-                                        </div>
-                                        <div class="mb-12">
-                                          <div class="walmart-sales-price d-flex " style="display: flex; align-items: center;">
-                                            $PRODUCT_PRICE
-                                            <div class="walmart-discount-percentage-card" style="margin-top: 1px; margin-left: 6px;">DISCOUNT%</div>
-                                          </div>
-                                          <div class="d-flex">
-                                            <span class="walmart-reference-price">$ORIGINAL_PRICE</span>
-                                          </div>
-                                        </div>
-                                        <div>
-                                          <div class="walmart-add-cart-button-container" style="justify-content: center; width: 95%;">
-                                            <span id="addProductToCart" class="ProductCardButton__AddToCartButton-sc-1r8ezq4-0 iRLHuO walmart-add-cart-button pt-5 text-center cp-no-select">Agregar</span>
-                                          </div>
-                                          <div class="walmart-add-cart-button-container-alert"></div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </div>
-                                </div>
+                              <li v-for="(product, index) in products" :key="index" class="ais-Hits-item">
+                                <ProductCard :product="product" />
                               </li>
                             </ul>
                           </div>
@@ -119,8 +78,57 @@
 </template>
 
 <script>
+import ProductCard from '../components/product/ProductCard.vue'
+
 export default {
-  name: 'SearchPage'
+  name: 'SearchPage',
+  components: {
+    ProductCard
+  },
+  data() {
+    return {
+      products: [
+        {
+          brand: 'Marca X',
+          description: 'descripcion del producto ofrecido',
+          image: 'www.lider.cl/catalogo/images/whiteLineIcon.svg',
+          price: 123456,
+          discount: 50,
+          originalPrice: 999999
+        },
+        {
+          brand: 'Marca Y',
+          description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
+          image: 'www.lider.cl/catalogo/images/homeIcon.svg',
+          price: 436455
+        },
+        {
+          brand: 'Marca Y',
+          description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
+          image: 'www.lider.cl/catalogo/images/homeIcon.svg',
+          price: 436455
+        },
+        {
+          brand: 'Marca Y',
+          description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
+          image: 'www.lider.cl/catalogo/images/whiteLineIcon.svg',
+          price: 436455
+        },
+        {
+          brand: 'Marca Y',
+          description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
+          image: 'www.lider.cl/catalogo/images/homeIcon.svg',
+          price: 436455
+        },
+        {
+          brand: 'Marca Y',
+          description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
+          image: 'www.lider.cl/catalogo/images/whiteLineIcon.svg',
+          price: 436455
+        }
+      ]
+    };
+  }
 }
 </script>
 
