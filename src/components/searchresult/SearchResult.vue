@@ -6,7 +6,7 @@
                     <b class="text-capitalize"> Resultados para búsqueda</b>: {{ searchPattern }}
                 </p>
             </div>
-            <div class="col-lg-7 col-md-8 col-sm-12">
+            <div v-if="hasResults" class="col-lg-7 col-md-8 col-sm-12">
                 <div>
                     <div class="dropdown">
                     <div class="dropdown">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex mb-60">
+        <div v-if="hasResults" class="d-flex mb-60">
             <div class="col-lg-12 col-md-12 col-sm-12 col-padding-12">
             <div class="shop-content">
                 <div style="" class="ais-Hits">
@@ -32,9 +32,17 @@
                 </ul>
                 </div>
                 <div class="pagination-container">
-                <paginator :totalPages="totalPages" :currentPage="currentPage" />
+                <paginator :totalPages="totalPages" :currentPage="currentPage" :page-handler="changePageCallback" />
                 </div>
             </div>
+            </div>
+        </div>
+        <div v-else class="d-flex mb-60">
+            <div v-if="emptyPattern">
+                Ingrese un patrón de búsqueda
+            </div>
+            <div v-else>
+                No se encontraron productos
             </div>
         </div>
     </div>
@@ -54,8 +62,17 @@ export default {
         "totalPages",
         "currentPage",
         "products",
-        "searchPattern"
-    ]
+        "searchPattern",
+        "changePageCallback"
+    ],
+    computed: {
+        hasResults: function() {
+            return this.products.length > 0;
+        },
+        emptyPattern: function() {
+            return this.searchPattern.trim() === '';
+        }
+    }
 }
 </script>
 

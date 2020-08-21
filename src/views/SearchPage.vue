@@ -7,7 +7,13 @@
             <div class="rct-page">
               <div class="rct-page-content">
                 <div class="shop-wrapper">
-                  <search-result :products="products" :search-pattern="searchPattern" :total-pages="totalPages" :current-page="currentPage" />
+                  <search-result 
+                    :products="products" 
+                    :search-pattern="searchPattern" 
+                    :total-pages="totalPages" 
+                    :current-page="currentPage" 
+                    :change-page-callback="changePageHandler"
+                    />
                 </div>
               </div>
             </div>
@@ -27,75 +33,47 @@ export default {
   components: {
     SearchResult
   },
+  methods: {
+    changePageHandler: function(newPage) {
+      const searchParams = {
+        pattern: this.searchPattern,
+        pageSize: 12,
+        page: newPage
+      }
+      searchProducts(searchParams).then(result => {
+        this.products = result.products
+        this.totalPages = result.totalPages
+        this.currentPage = newPage
+      });
+    }
+  },
   computed: {
     searchPattern() {
       return this.$store.state.searchPattern;
     },
-    products() {
-      return this.products2;
-//      return this.$store.state.products;
-    },
-    currentPage() {
-      return this.currentPage2;
-//      return this.$store.state.searchPattern;
-    },
-    totalPages() {
-      return this.totalPages2;
-//      return this.$store.state.searchPattern;
-    }
   },
   watch: {
-    searchPattern (newPattern, oldPattern) {
-      console.log("Search pattern has changed from '"+oldPattern+"' to '"+newPattern+"'");
-      searchProducts({ pattern: this.searchPattern }).then(result => {
-        this.products2 = result.products
+    searchPattern (newPattern) {
+      const searchParams = {
+        pattern: newPattern,
+        pageSize: 12,
+        page: 1
+      }
+      searchProducts(searchParams).then(result => {
+        this.products = result.products
+        this.totalPages = result.totalPages
+        this.currentPage = 1
       });
+    },
+    currentPAge (newPage) {
+      console.log("Page has changed to " + newPage)
     }
   },
   data() {
     return {
-      totalPages2: 10,
-      currentPage2: 2,
-      products2: [
-        {
-          brand: 'Marca X',
-          description: 'descripcion del producto ofrecido',
-          image: 'www.lider.cl/catalogo/images/whiteLineIcon.svg',
-          price: 123456,
-          discount: 50,
-          originalPrice: 999999
-        },
-        {
-          brand: 'Marca Y',
-          description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
-          image: 'www.lider.cl/catalogo/images/homeIcon.svg',
-          price: 436455
-        },
-        {
-          brand: 'Marca Y',
-          description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
-          image: 'www.lider.cl/catalogo/images/homeIcon.svg',
-          price: 436455
-        },
-        {
-          brand: 'Marca Y',
-          description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
-          image: 'www.lider.cl/catalogo/images/whiteLineIcon.svg',
-          price: 436455
-        },
-        {
-          brand: 'Marca Y',
-          description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
-          image: 'www.lider.cl/catalogo/images/homeIcon.svg',
-          price: 4036455
-        },
-        {
-          brand: 'Marca Y',
-          description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
-          image: 'www.lider.cl/catalogo/images/whiteLineIcon.svg',
-          price: '023455'
-        }
-      ]
+      totalPages: 0,
+      currentPage: 0,
+      products: []
     };
   }
 }
