@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-12">
+    <div class="product-prices mb-12">
         <div class="walmart-sales-price d-flex">
             {{ productPrice | toCurrency}}
             <div v-if="hasDiscount" class="walmart-discount-percentage-card">{{ productDiscount }}%</div>
@@ -54,5 +54,9 @@ export default {
     margin-left: 10px;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.product-prices {
+    font-family: heebo,sans-serif
 }
 </style>

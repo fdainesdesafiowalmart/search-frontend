@@ -35,33 +35,12 @@
                           <div style="" class="ais-Hits">
                             <ul class="ais-Hits-list">
                               <li v-for="(product, index) in products" :key="index" class="ais-Hits-item">
-                                <ProductCard :product="product" />
+                                <product-card :product="product" />
                               </li>
                             </ul>
                           </div>
                           <div class="pagination-container">
-                            <div class="pagination-wmt">
-                              <ul class="ais-Pagination-list">
-                                <li class="ais-Pagination-item ais-Pagination-item--previousPage pagination-disabled-arrows">
-                                  <a tabindex="0" role="button" aria-disabled="true">&lt;</a>
-                                </li>
-                                <li class="ais-Pagination-item ais-Pagination-item--page ais-Pagination-item--selected">
-                                  <a role="button" class="ais-Pagination-link" tabindex="0" aria-label="Page 1 is your current page" aria-current="page">1</a>
-                                </li>
-                                <li class="ais-Pagination-item ais-Pagination-item--page">
-                                  <a role="button" class="ais-Pagination-link" tabindex="0" aria-label="Page 2">2</a>
-                                </li>
-                                <li class="ais-Pagination-item ais-Pagination-item--page">
-                                  <a role="button" class="ais-Pagination-link" tabindex="0" aria-label="Page 3">3</a>
-                                </li>
-                                <li class="ais-Pagination-item ais-Pagination-item--page">
-                                  <a role="button" class="ais-Pagination-link" tabindex="0" aria-label="Page 4">4</a>
-                                </li>
-                                <li class="ais-Pagination-item ais-Pagination-item--nextPage">
-                                  <a tabindex="0" role="button" aria-disabled="false">&gt;</a>
-                                </li>
-                              </ul>
-                            </div>
+                            <paginator :totalPages="5" :currentPage="2" />
                           </div>
                         </div>
                       </div>
@@ -79,11 +58,13 @@
 
 <script>
 import ProductCard from '../components/product/ProductCard.vue'
+import Paginator from '../components/paginator/Paginator.vue'
 
 export default {
   name: 'SearchPage',
   components: {
-    ProductCard
+    ProductCard,
+    Paginator
   },
   data() {
     return {
@@ -118,13 +99,13 @@ export default {
           brand: 'Marca Y',
           description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
           image: 'www.lider.cl/catalogo/images/homeIcon.svg',
-          price: 436455
+          price: 4036455
         },
         {
           brand: 'Marca Y',
           description: 'descripcion del producto ofrecido, eventualmente la descripcion podria ser demasiado larga para la tarjeta e producto',
           image: 'www.lider.cl/catalogo/images/whiteLineIcon.svg',
-          price: 436455
+          price: '023455'
         }
       ]
     };
