@@ -43,6 +43,11 @@ export default {
 //      return this.$store.state.searchPattern;
     }
   },
+  watch: {
+    searchPattern (newPattern, oldPattern) {
+      console.log("Search pattern has changed from '"+oldPattern+"' to '"+newPattern+"'");
+    }
+  },
   data() {
     return {
       totalPages2: 10,
