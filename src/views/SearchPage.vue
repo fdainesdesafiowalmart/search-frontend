@@ -7,7 +7,7 @@
             <div class="rct-page">
               <div class="rct-page-content">
                 <div class="shop-wrapper">
-                  <search-result :products="products" :search-pattern="pattern" :total-pages="totalPages" :current-page="currentPage" />
+                  <search-result :products="products" :search-pattern="searchPattern" :total-pages="totalPages" :current-page="currentPage" />
                 </div>
               </div>
             </div>
@@ -26,12 +26,28 @@ export default {
   components: {
     SearchResult
   },
+  computed: {
+    searchPattern() {
+      return this.$store.state.searchPattern;
+    },
+    products() {
+      return this.products2;
+//      return this.$store.state.products;
+    },
+    currentPage() {
+      return this.currentPage2;
+//      return this.$store.state.searchPattern;
+    },
+    totalPages() {
+      return this.totalPages2;
+//      return this.$store.state.searchPattern;
+    }
+  },
   data() {
     return {
-      pattern: 'HolaMundo',
-      totalPages: 10,
-      currentPage: 2,
-      products: [
+      totalPages2: 10,
+      currentPage2: 2,
+      products2: [
         {
           brand: 'Marca X',
           description: 'descripcion del producto ofrecido',

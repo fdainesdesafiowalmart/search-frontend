@@ -22,7 +22,7 @@
             <div class="show-category">Categorías</div>
           </div>
         </div>
-       <search-bar :search-callback="searchProducts" />
+       <search-bar :search-callback="searchProductsHandler" />
 
         <div class="cart-supermarket-width">
           <div class="cart-container" style="background-color: rgb(4, 30, 66);">
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 import SearchBar from '../searchbar/SearchBar.vue'
 
 export default {
@@ -53,8 +55,9 @@ export default {
     SearchBar
   },
   methods: {
-    searchProducts: function(pattern) {
-      console.log('Search for products usign pattern "'+pattern+'"')
+    ...mapActions(["searchProducts"]),
+    searchProductsHandler: function(pattern) {
+      this.searchProducts(pattern);
     }
   }
 }
