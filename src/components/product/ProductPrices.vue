@@ -1,16 +1,25 @@
 <template>
     <div class="mb-12">
         <div class="walmart-sales-price d-flex">
-            ${{ productPrice }}
+            {{ productPrice | toCurrency}}
             <div v-if="hasDiscount" class="walmart-discount-percentage-card">{{ productDiscount }}%</div>
         </div>
         <div class="d-flex">
-            <span v-if="hasDiscount" class="walmart-reference-price">${{ originalPrice }}</span>
+            <span v-if="hasDiscount" class="walmart-reference-price">{{ originalPrice | toCurrency }}</span>
         </div>
     </div>
 </template>
 
 <script>
+const currencyFormatter = require('currency-formatter'); 
+
+const currencyOptions = {
+  symbol: '$',
+  thousand: '.',
+  precision: 0,
+  format: '%s%v'
+}
+
 export default {
     name: 'ProductPrices',
     props: [
@@ -22,6 +31,9 @@ export default {
         hasDiscount: function() {
             return this.productDiscount > 0;
         }
+    },
+    filters: {
+        toCurrency: value => currencyFormatter.format(value, currencyOptions)
     }
 }
 </script>
