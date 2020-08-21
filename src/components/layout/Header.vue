@@ -22,7 +22,7 @@
             <div class="show-category">Categorías</div>
           </div>
         </div>
-       <search-bar />
+       <search-bar :search-callback="searchProducts" />
 
         <div class="cart-supermarket-width">
           <div class="cart-container" style="background-color: rgb(4, 30, 66);">
@@ -51,6 +51,11 @@ export default {
   name: 'Header',
   components: {
     SearchBar
+  },
+  methods: {
+    searchProducts: function(pattern) {
+      console.log('Search for products usign pattern "'+pattern+'"')
+    }
   }
 }
 </script>
