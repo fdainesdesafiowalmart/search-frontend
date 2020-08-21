@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { searchProducts } from '../clients/backend'
 import SearchResult from '../components/searchresult/SearchResult'
 
 export default {
@@ -46,6 +47,9 @@ export default {
   watch: {
     searchPattern (newPattern, oldPattern) {
       console.log("Search pattern has changed from '"+oldPattern+"' to '"+newPattern+"'");
+      searchProducts({ pattern: this.searchPattern }).then(result => {
+        this.products2 = result.products
+      });
     }
   },
   data() {

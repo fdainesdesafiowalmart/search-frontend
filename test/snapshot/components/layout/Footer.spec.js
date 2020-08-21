@@ -1,6 +1,6 @@
-import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
+import { shallowMount, RouterLinkStub } from '@vue/test-utils'
 
-import Footer from 'components/Footer.vue'
+import Footer from 'components/layout/Footer.vue'
 
 describe('Footer.vue', () => {
   it('its a Vue instance', () => {
