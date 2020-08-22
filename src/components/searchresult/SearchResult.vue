@@ -7,18 +7,7 @@
                 </p>
             </div>
             <div v-if="hasResults" class="col-lg-7 col-md-8 col-sm-12">
-                <div>
-                    <div class="dropdown">
-                    <div class="dropdown">
-                        <div data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="category-order-dropdown">
-                        Ordenar por: precio
-                        <span class="pull-right">
-                            <img alt="open-arrow" width="5" src="https://www.lider.cl/catalogo/images/arrow_mobile.svg">
-                        </span>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                <sort-criteria :on-criteria-changed="sortCriteriaHandler" />
             </div>
         </div>
         <div v-if="hasResults" class="d-flex mb-60">
@@ -53,6 +42,7 @@ import ProductCard from '../product/ProductCard.vue'
 import Paginator from '../paginator/Paginator.vue'
 import NoResults from './NoResults.vue'
 import NoSearch from './NoSearch.vue'
+import SortCriteria from './SortCriteria.vue'
 
 export default {
     name: 'SearchResult',
@@ -60,14 +50,16 @@ export default {
         ProductCard,
         Paginator,
         NoResults,
-        NoSearch
+        NoSearch,
+        SortCriteria
     },
     props: [
         "totalPages",
         "currentPage",
         "products",
         "searchPattern",
-        "changePageCallback"
+        "changePageCallback",
+        "changeSortCriteriaCallback"
     ],
     computed: {
         hasResults: function() {
@@ -75,6 +67,11 @@ export default {
         },
         emptyPattern: function() {
             return this.searchPattern.trim() === '';
+        }
+    },
+    methods: {
+        sortCriteriaHandler: function(criteria) {
+            this.changeSortCriteriaCallback(criteria);
         }
     }
 }

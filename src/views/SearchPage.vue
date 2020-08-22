@@ -13,6 +13,7 @@
                     :total-pages="totalPages" 
                     :current-page="currentPage" 
                     :change-page-callback="changePageHandler"
+                    :change-sort-criteria-callback="changeSortCriteriaHandler"
                     />
                 </div>
               </div>
@@ -34,8 +35,9 @@ export default {
     SearchResult
   },
   methods: {
-    searchForProducts: function(pattern, page) {
+    searchForProducts: function(pattern, page, orderby) {
       const searchParams = {
+        orderby: orderby,
         pattern: pattern,
         pageSize: 12,
         page: page
@@ -48,10 +50,16 @@ export default {
         this.products = []
         this.totalPages = 0
         this.currentPage = 0
+        this.currentSortCriteria = 'id'
       })
     },
     changePageHandler: function(newPage) {
-      this.searchForProducts(this.searchPattern, newPage);
+      this.searchForProducts(this.searchPattern, newPage, this.currentSortCriteria);
+    },
+    changeSortCriteriaHandler: function(newCriteria) {
+      console.log("Ahora ordernar por " + newCriteria);
+      this.currentSortCriteria = newCriteria;
+      this.searchForProducts(this.searchPattern, this.currentPage, newCriteria);
     }
   },
   computed: {
@@ -71,6 +79,7 @@ export default {
     return {
       totalPages: 0,
       currentPage: 0,
+      currentSortCriteria: 'id',
       products: []
     };
   }
