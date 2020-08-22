@@ -38,11 +38,11 @@
             </div>
         </div>
         <div v-else class="d-flex mb-60">
-            <div v-if="emptyPattern">
-                Ingrese un patrón de búsqueda
+            <div v-if="emptyPattern" style="width: 100%;">
+                <no-search />
             </div>
-            <div v-else>
-                No se encontraron productos
+            <div v-else style="width: 100%;">
+                <no-results />
             </div>
         </div>
     </div>
@@ -51,12 +51,16 @@
 <script>
 import ProductCard from '../product/ProductCard.vue'
 import Paginator from '../paginator/Paginator.vue'
+import NoResults from './NoResults.vue'
+import NoSearch from './NoSearch.vue'
 
 export default {
     name: 'SearchResult',
     components: {
         ProductCard,
-        Paginator
+        Paginator,
+        NoResults,
+        NoSearch
     },
     props: [
         "totalPages",

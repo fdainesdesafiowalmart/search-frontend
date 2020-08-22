@@ -34,17 +34,24 @@ export default {
     SearchResult
   },
   methods: {
-    changePageHandler: function(newPage) {
+    searchForProducts: function(pattern, page) {
       const searchParams = {
-        pattern: this.searchPattern,
+        pattern: pattern,
         pageSize: 12,
-        page: newPage
+        page: page
       }
       searchProducts(searchParams).then(result => {
         this.products = result.products
         this.totalPages = result.totalPages
-        this.currentPage = newPage
-      });
+        this.currentPage = page
+      }).catch(() => {
+        this.products = []
+        this.totalPages = 0
+        this.currentPage = 0
+      })
+    },
+    changePageHandler: function(newPage) {
+      this.searchForProducts(this.searchPattern, newPage);
     }
   },
   computed: {
@@ -54,16 +61,7 @@ export default {
   },
   watch: {
     searchPattern (newPattern) {
-      const searchParams = {
-        pattern: newPattern,
-        pageSize: 12,
-        page: 1
-      }
-      searchProducts(searchParams).then(result => {
-        this.products = result.products
-        this.totalPages = result.totalPages
-        this.currentPage = 1
-      });
+      this.searchForProducts(newPattern, 1);
     },
     currentPAge (newPage) {
       console.log("Page has changed to " + newPage)
