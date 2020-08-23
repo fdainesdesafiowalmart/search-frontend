@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseEndpoint = 'http://localhost:8090';
+const baseEndpoint = process.env.VUE_APP_SEARCH_BFF_URI;
 
 const instance = axios.create({
   baseURL: baseEndpoint,
@@ -9,8 +9,7 @@ const instance = axios.create({
 
 const resolveBffApiKeyHeaders = () => {
   const headers = {}
-  headers['x-walmart-search-bff-key'] = 'SEARCH_BFF_API_KEY'
-
+  headers[process.env.VUE_APP_SEARCH_BFF_APIKEY_HEADER] = process.env.VUE_APP_SEARCH_BFF_APIKEY_VALUE
   return headers
 }
 
