@@ -8,7 +8,9 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test": "jest --coverage",
-    "test:coverage": "vue-cli-service test --coverage"
+    "test:coverage": "vue-cli-service test --coverage",
+    "postinstall": "npm run build",
+    "start": "node server.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
