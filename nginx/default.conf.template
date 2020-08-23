@@ -5,12 +5,4 @@ server {
     root   /usr/share/nginx/html;
     index  index.html index.htm;
   }
-
-  location ~ \.(css) {
-    root /usr/share/nginx/html;
-  }
-
-  location ~ \.(js) {
-    root /usr/share/nginx/html;
-  }
 }
