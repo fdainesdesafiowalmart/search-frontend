@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoResults.vue renders static content as expected 1`] = `
+<div
+  class="no-result-container"
+>
+  <div
+    class="no-result-body"
+  >
+    <img
+      alt="exploding-icon"
+      class="image"
+      src="https://www.lider.cl/catalogo/images/explodingIcon.png"
+    />
+     
+    <div
+      class="no-result-header"
+    >
+      ¡Lo sentimos!
+    </div>
+     
+    <div
+      class="no-result-title"
+    >
+      No encontramos resultados para tu búsqueda de 
+            
+      <span>
+        "blablabla"
+      </span>
+    </div>
+     
+    <div
+      class="separator"
+    />
+     
+    <div
+      class="no-result-description"
+    >
+      <b>
+        Algunos tips
+      </b>
+      : Revisa si escribiste correctamente lo que buscas. Puedes probar nuevamente usando términos menos específicos.
+        
+    </div>
+  </div>
+</div>
+`;

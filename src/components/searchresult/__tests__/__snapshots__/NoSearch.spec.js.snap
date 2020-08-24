@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoSearch.vue renders static content as expected 1`] = `
+<div
+  class="no-search-container"
+>
+  <div
+    class="no-search-body"
+  >
+    <div
+      class="no-search-description"
+    >
+      
+            Ingrese un patrón de búsqueda
+        
+    </div>
+  </div>
+</div>
+`;
